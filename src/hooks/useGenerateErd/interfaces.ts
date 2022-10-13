@@ -1,3 +1,5 @@
+import { Edge } from "reactflow";
+
 export interface Column {
   columnName: string;
   charLength: string;
@@ -7,18 +9,21 @@ export interface Column {
   isForeignKey: string;
 }
 
-export interface Relation {
-  COLUMN_NAME: string;
-  REFERENCED_COLUMN_NAME: string;
-  REFERENCED_TABLE_NAME: string;
-  TABLE_NAME: string;
-}
-
 export interface Tables {
   [key: string]: Column[];
 }
 
-export interface ErdInfo {
-  relations: Relation[];
+export interface NodeLayout {
+  id: string;
+  x: number;
+  y: number;
+}
+export interface Layout {
+  children: NodeLayout[];
+}
+
+export interface Erd {
+  edges: Edge[];
   tables: Tables;
+  layout: Layout;
 }

@@ -1,6 +1,6 @@
 import { Edge } from "reactflow";
 
-export interface Column {
+export interface Row {
   columnName: string;
   charLength: string;
   dataType: string;
@@ -10,7 +10,7 @@ export interface Column {
 }
 
 export interface Tables {
-  [key: string]: Column[];
+  [key: string]: Row[];
 }
 
 export interface NodeLayout {

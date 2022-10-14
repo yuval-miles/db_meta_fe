@@ -29,10 +29,11 @@ const DBList = ({
         <Stack direction={"row"} gap={2}>
           {databases.map((el) => (
             <DatabaseCard
-              key={el.host + el.port}
+              key={el.id}
               host={el.host}
               port={el.port}
               database={el.database}
+              id={el.id}
             />
           ))}
         </Stack>

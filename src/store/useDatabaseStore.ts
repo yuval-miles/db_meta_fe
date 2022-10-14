@@ -1,6 +1,7 @@
 import create from "zustand";
 
 export interface DatabaseInfo {
+  id: string;
   database: string;
   host: string;
   port: string;

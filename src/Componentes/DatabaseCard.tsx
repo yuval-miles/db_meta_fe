@@ -6,10 +6,12 @@ const DatabaseCard = ({
   host,
   port,
   database,
+  id,
 }: {
   host: string;
   port: string;
   database: string;
+  id: string;
 }) => {
   const { selectedDatabase, setSelectedDatabase } = useDatabaseStore(
     (state) => ({
@@ -35,7 +37,9 @@ const DatabaseCard = ({
             <>
               <Button
                 variant="outlined"
-                onClick={() => setSelectedDatabase({ host, port, database })}
+                onClick={() =>
+                  setSelectedDatabase({ host, port, database, id })
+                }
               >
                 Select
               </Button>

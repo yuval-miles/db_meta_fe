@@ -5,7 +5,7 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-import { Column } from "../hooks/useGenerateErd";
+import { Row } from "../hooks/useGenerateErd";
 import { Tooltip, Typography } from "@mui/material";
 import KeyIcon from "@mui/icons-material/Key";
 import TableCell from "@mui/material/TableCell";
@@ -13,7 +13,7 @@ import TableCell from "@mui/material/TableCell";
 const TableNode = ({
   data: { columns, tableName },
 }: {
-  data: { columns: Column[]; tableName: string };
+  data: { columns: Row[]; tableName: string };
 }) => {
   return (
     <TableContainer component={Paper}>

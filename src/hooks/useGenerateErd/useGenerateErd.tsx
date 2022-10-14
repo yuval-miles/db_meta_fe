@@ -3,9 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import axiosClient from "../../utils/axiosClient";
 import { DatabaseInfo } from "../../store/useDatabaseStore";
-import ELK from "elkjs";
 import { Erd } from "./interfaces";
-const elk = new ELK();
 
 export const useGenerateErd = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -16,7 +14,7 @@ export const useGenerateErd = () => {
     DatabaseInfo
   >(
     async (data) =>
-      (await axiosClient.post("/database/generate-erd", data)).data,
+      (await axiosClient.post("/database/generate-erd", { id: data.id })).data,
     {
       onSuccess: async (data) => {
         console.log(data);

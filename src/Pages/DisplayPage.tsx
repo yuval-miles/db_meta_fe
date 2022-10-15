@@ -8,7 +8,7 @@ import TableNode from "../Componentes/TabelNode";
 const nodeTypes = { tableNode: TableNode };
 
 const DisplayPage = () => {
-  const { refetch, erdLoading, nodes, edges, onEdgesChange, onNodesChange } =
+  const { erdLoading, nodes, edges, onEdgesChange, onNodesChange } =
     useLoadDatabases();
   return (
     <>

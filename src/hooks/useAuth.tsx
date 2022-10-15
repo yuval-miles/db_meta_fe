@@ -9,7 +9,7 @@ export const useAuth = () => {
   const location = useLocation();
   const [errorAlert, setErrorAlert] = useState({ show: false, message: "" });
   const { isLoading: authLoading, data: token } = useQuery<
-    any,
+    { email: string; id: string; iat: number },
     AxiosError<{ response: string; message: string }>
   >(["auth"], async () => (await axiosClient.get("/auth")).data, {
     cacheTime: 0,

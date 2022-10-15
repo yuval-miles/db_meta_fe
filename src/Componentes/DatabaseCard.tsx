@@ -1,5 +1,11 @@
-import { Button, Paper, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { useDatabaseStore } from "../store/useDatabaseStore";
 
 const DatabaseCard = ({
@@ -7,11 +13,13 @@ const DatabaseCard = ({
   port,
   database,
   id,
+  thumbnail,
 }: {
   host: string;
   port: string;
   database: string;
   id: string;
+  thumbnail?: string;
 }) => {
   const { selectedDatabase, setSelectedDatabase } = useDatabaseStore(
     (state) => ({
@@ -20,12 +28,22 @@ const DatabaseCard = ({
     })
   );
   return (
-    <Paper sx={{ padding: "10px", width: "150px" }}>
-      <Stack>
-        <Typography variant="h6">{database}</Typography>
-        <Typography>
+    <Card sx={{ maxWidth: 450 }}>
+      <CardMedia
+        component="img"
+        height="180"
+        image={thumbnail}
+        alt="green iguana"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {database}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
           {host} : {port}
         </Typography>
+      </CardContent>
+      <CardActions>
         {selectedDatabase ? (
           selectedDatabase.host === host && selectedDatabase.port === port ? (
             <>
@@ -48,8 +66,8 @@ const DatabaseCard = ({
         ) : (
           <></>
         )}
-      </Stack>
-    </Paper>
+      </CardActions>
+    </Card>
   );
 };
 

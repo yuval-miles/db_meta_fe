@@ -19,8 +19,8 @@ export const useGenerateErd = () => {
       onSuccess: async (data) => {
         console.log(data);
         const nodes: Node[] = [];
-        if (data?.layout?.children)
-          for (const table of data.layout.children) {
+        if (data?.layout)
+          for (const table of data.layout) {
             if (table.x && table.y)
               nodes.push({
                 id: table.id,

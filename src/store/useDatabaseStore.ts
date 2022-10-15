@@ -5,6 +5,7 @@ export interface DatabaseInfo {
   database: string;
   host: string;
   port: string;
+  thumbnail?: string;
 }
 
 interface DatabaseStore {

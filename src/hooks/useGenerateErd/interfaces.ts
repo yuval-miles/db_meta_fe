@@ -18,12 +18,8 @@ export interface NodeLayout {
   x: number;
   y: number;
 }
-export interface Layout {
-  children: NodeLayout[];
-}
-
 export interface Erd {
   edges: Edge[];
   tables: Tables;
-  layout: Layout;
+  layout: NodeLayout[];
 }

@@ -34,6 +34,7 @@ const DBList = ({
               port={el.port}
               database={el.database}
               id={el.id}
+              thumbnail={el.thumbnail}
             />
           ))}
         </Stack>

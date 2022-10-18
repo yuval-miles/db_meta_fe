@@ -9,9 +9,17 @@ export interface Row {
   isForeignKey: string;
 }
 
-export interface Tables {
+export interface TablesGenerated {
   [key: string]: Row[];
 }
+
+export type TablesSaved = {
+  height: number;
+  name: string;
+  x: number;
+  y: number;
+  columns: Row[];
+}[];
 
 export interface NodeLayout {
   id: string;
@@ -20,6 +28,6 @@ export interface NodeLayout {
 }
 export interface Erd {
   edges: Edge[];
-  tables: Tables;
-  layout: NodeLayout[];
+  tables: TablesGenerated | TablesSaved;
+  layout?: NodeLayout[];
 }

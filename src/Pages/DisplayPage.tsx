@@ -13,6 +13,8 @@ import { useCallback, useEffect } from "react";
 import { io, Socket } from "socket.io-client";
 import { useSocket } from "../store/useSocket";
 import { useDatabaseStore } from "../store/useDatabaseStore";
+import { useErdDiff } from "../hooks/useErdDiff";
+import useReactFlowStore from "../store/useReactFlowStore";
 
 const nodeTypes = { tableNode: TableNode };
 
@@ -26,15 +28,16 @@ const DisplayPage = () => {
     setSocket: state.setSocket,
     socket: state.socket,
   }));
-  const { erdLoading, nodes, edges, onEdgesChange, onNodesChange } =
-    useLoadDatabases();
-  useEffect(() => {
-    const socket: Socket = io("http://localhost:3000");
-    setSocket(socket);
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  const { nodes, edges, onEdgesChange, onNodesChange } = useReactFlowStore(
+    (state) => ({
+      nodes: state.nodes,
+      edges: state.edges,
+      onNodesChange: state.onNodesChange,
+      onEdgesChange: state.onEdgesChange,
+    })
+  );
+  const { erdLoading } = useLoadDatabases();
+  useErdDiff();
   const onDrag = useCallback(
     (changes: NodeChange[]) => {
       if (isPositionChange(changes[0]) && changes[0].dragging) {
@@ -57,6 +60,13 @@ const DisplayPage = () => {
     },
     [socket, selectedDb]
   );
+  useEffect(() => {
+    const socket: Socket = io("http://localhost:3000");
+    setSocket(socket);
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   return (
     <>
       <Box sx={{ width: "100%", height: "92.5vh" }}>

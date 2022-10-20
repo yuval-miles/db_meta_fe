@@ -5,35 +5,34 @@ import Button from "@mui/material/Button";
 import { useAuth } from "../hooks/useAuth";
 import { useState } from "react";
 import ManageDBModal from "./ManageDB/ManageDBModal";
-import { useMutation } from "@tanstack/react-query";
-import axiosClient from "../utils/axiosClient";
-import { useDatabaseStore, DatabaseInfo } from "../store/useDatabaseStore";
-import { AxiosError } from "axios";
+import { Stack } from "@mui/material";
+import { useDatabaseStore } from "../store/useDatabaseStore";
+import { useResetErd } from "../hooks/useResetErd";
 
 const NavBar = () => {
   const { logout } = useAuth();
   const { selectedDb } = useDatabaseStore((state) => ({
     selectedDb: state.databaseStore.selectedDatabase,
   }));
-  const { mutate } = useMutation<any, AxiosError, DatabaseInfo>(
-    async () =>
-      (await axiosClient.post("/database/compare-erd", { id: selectedDb!.id }))
-        .data,
-    {
-      onSuccess: (data) => {
-        console.log(data);
-      },
-    }
-  );
+  const { resetErd } = useResetErd();
   const [openDBModal, setOpenDBModal] = useState(false);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ background: "#fcfcfc" }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="outlined" onClick={() => setOpenDBModal(true)}>
-            Manage Databases
-          </Button>
-          <Button onClick={() => mutate(selectedDb)}>test</Button>
+          <Stack direction={"row"} gap={2}>
+            <Button variant="outlined" onClick={() => setOpenDBModal(true)}>
+              Manage Databases
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                if (selectedDb) resetErd(selectedDb);
+              }}
+            >
+              Reset Erd
+            </Button>
+          </Stack>
           <Button color="primary" variant="contained" onClick={() => logout()}>
             Logout
           </Button>

@@ -28,7 +28,7 @@ const DatabaseCard = ({
     })
   );
   return (
-    <Card sx={{ maxWidth: 450 }}>
+    <Card sx={{ minWidth: 240 }}>
       <CardMedia
         component="img"
         height="180"

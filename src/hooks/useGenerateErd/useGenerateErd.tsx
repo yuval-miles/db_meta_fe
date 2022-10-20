@@ -1,13 +1,16 @@
-import { useEdgesState, useNodesState, Node } from "reactflow";
+import { Node } from "reactflow";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import axiosClient from "../../utils/axiosClient";
 import { DatabaseInfo } from "../../store/useDatabaseStore";
 import { Erd, TablesGenerated, TablesSaved } from "./interfaces";
+import useReactFlowStore from "../../store/useReactFlowStore";
 
 export const useGenerateErd = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const { setEdges, setNodes } = useReactFlowStore((state) => ({
+    setNodes: state.setNodes,
+    setEdges: state.setEdges,
+  }));
   const { mutate: generateERD, isLoading: erdLoading } = useMutation<
     Erd,
     AxiosError,
@@ -49,12 +52,8 @@ export const useGenerateErd = () => {
   return {
     generateERD,
     erdLoading,
-    nodes,
-    edges,
     setNodes,
     setEdges,
-    onNodesChange,
-    onEdgesChange,
   };
 };
 
